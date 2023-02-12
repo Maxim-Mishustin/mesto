@@ -1,0 +1,15 @@
+.root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  background: #353333;
+  display: flex;
+  /* justify-content: center; */
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+}

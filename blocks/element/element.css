@@ -1,0 +1,27 @@
+.element {
+  background-color: white;
+}
+.element__image {
+  width: 282px;
+}
+.element__description {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px 0 21px;
+  
+}
+
+.element__title {
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 29px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  /* сверху 3 строчки для переполнения блока. не сработало */
+
+}
+
+.element__like {
+}

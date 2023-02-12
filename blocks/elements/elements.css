@@ -1,0 +1,10 @@
+.elements {
+  display: grid;
+  grid-template-columns: 282px 1fr 1fr;
+  grid-template-rows: auto auto;
+  width: 100%;
+  gap: 20px 17px;
+  max-width: 880px;
+  width: calc(100% - 200px*2);
+  outline: solid 1px yellow;
+}
