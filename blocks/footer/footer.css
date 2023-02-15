@@ -1,5 +1,5 @@
 .footer {
-  max-width: 318px;
+  width: 318px;
   width: calc(100% - 200px - 762px);
   margin: 67px auto 60px 200px;
   outline: solid 1px red;
@@ -16,7 +16,7 @@
   color: #545454;
 }
 
-@media screen and (max-width: 1024px) {
+/* @media screen and (max-width: 1024px) {
   .footer {
     max-width: 928px;
     width: calc(100% - 48px*2);
@@ -37,4 +37,4 @@
     flex-direction: column;
     gap: 48px;
   }
-}
+} */

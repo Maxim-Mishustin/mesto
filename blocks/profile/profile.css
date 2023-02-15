@@ -1,11 +1,24 @@
 .profile {
   display: flex;
   margin: 40px auto 51px;
-  /* flex-direction: row; */
-  justify-content: space-between;
+  /* justify-content: space-between; */
   max-width: 880px;
   width: calc(100% - 200px*2);
   outline: 1px solid wheat;
+  position: relative;
+}
+
+@media screen and (max-width: 1040px) {
+  .profile {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .profile {
+    margin-top: 42px;
+  }
 }
 
 .profile__avatar {
@@ -15,22 +28,51 @@
   /* object-fit: cover;
   object-position: 0px top; не дало результата */
   outline: solid 1px rgb(39, 243, 80);
-
+  margin-right: 30px;
 }
 
-.profile__info-add {
-  display: flex;
-  justify-content: space-between;
-  outline: solid 1px rgb(145, 223, 244);
-  width: 760px;
-  /* width: 100% - 120px; */
+@media screen and (max-width: 1040px) {
+  .profile__avatar {
+    width: 150px;
+    height: 150px;
+    margin: 30px auto;
+
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .profile__avatar {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 26px;
+
+  }
 }
 
 .profile__info {
   color: white;
   position: relative;
   outline: solid 1px rgb(238, 252, 89);
+  width: 336px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
+@media screen and (max-width: 1040px) {
+  .profile__info {
+    width: 100%;
+    margin-bottom: 30px;
+    text-align: center;
+
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .profile__info {
+    margin-bottom: 36px;
+    text-align: center;
+  }
 }
 
 .profile__title {
@@ -38,22 +80,51 @@
   font-weight: 500;
   font-size: 42px;
   line-height: 48px;
+  margin: 0;
+  padding: 0;
 }
 
+@media screen and (max-width: 740px) {
+  .profile__title {
+    font-size: 27px;
+    line-height: 33px;
+  }
+}
+
+
 .profile__edit-button {
+  background-color: transparent; /* делает прозрачным фон */
   background-image: url(../../images/vector-edit-button.svg);
   background-size: 10px 10px;
-  /* background-repeat: no-repeat; */
+  background-repeat: no-repeat;
   position: absolute;
-  /* background-position: right top; */
+  background-position: center;
+  cursor: pointer;
   color: white;
-  top: 22px;
+  top: 37px;
   right: 0;
   border: solid red 2px;
-  /* border-width: 50px 150px;
-  box-sizing: border-box; */
-  /* width: 10px;
-  height: 10px; */
+  width: 24px;
+  height: 24px;
+}
+
+@media screen and (max-width: 1040px) {
+  .profile__edit-button {
+    top: 15px;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .profile__edit-button {
+    top: 8px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.profile__edit-button:hover {
+  /* Прозрачный фон при наведении курсора */
+  background-color: transparent;
 }
 
 .profile__text {
@@ -61,15 +132,47 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 740px) {
+  .profile__text {
+    font-size: 14px;
+    line-height: 17px;
+  }
 }
 
 .profile__add-button {
   background-image: url(../../images/vector-add-button.svg);
   background-repeat: no-repeat;
   color: white;
-  width: 22px;
-  height: 22px;
-  border: solid red 1px;
-  border-width: 50px 150px;
+  border: solid red 2px;
+  width: 150px;
+  height: 50px;
+  border-radius: 2px;
+  background-position: center;
+  cursor: pointer;
+  background-color: transparent; /* делает прозрачным фон */
+  position: absolute;
+  top: 35px;
+  right: 0;
+  margin: 0;
+  padding: 0;
   /* box-sizing: border-box; */
+}
+
+@media screen and (max-width: 1040px) {
+  .profile__add-button {
+    position: static;
+    width: 50%;
+  
+  }
+}
+
+@media screen and (max-width: 1040px) {
+  .profile__add-button {
+    width: 100%;
+  
+  }
 }

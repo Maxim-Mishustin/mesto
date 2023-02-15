@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./pages/index.css">
-    <title>Mesto</title>
+    <title>MestoRussia</title>
   </head>
   <body class="root">
     <div class="page">
@@ -14,66 +14,85 @@
       <main class="content">
         <section class="profile">
           <img class="profile__avatar" src="./images/image.jpg" alt="Аватар">
-          <div class="profile__info-add">
             <div class="profile__info">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
-              <button class="profile__edit-button"></button>
+              <button type="button" name="edit-button" class="profile__edit-button"></button>
               <p class="profile__text">Исследователь океана</p>
             </div>
-          <button class="profile__add-button"></button>
-          </div>
+          <button type="button" name="add-button" class="profile__add-button"></button>
         </section>
         <section class="elements">
           <article class="element">
             <img class="element__image" src="./images/divnogorie.png" alt="Дивногорье">
             <div class="element__description">
               <h2 class="element__title">Дивногорье</h2>
-              <img class="element__like" src="./images/vector-like.svg" alt="Лайк">
+              <img class="element__like element__like_active" src="./images/vector-like.svg" alt="Лайк">
             </div>
           </article> 
           <article class="element">
-            <img class="element__image" src="./images/dubai.png" alt="Дубай">
+            <img class="element__image" src="./images/baikal.jpg" alt="Байкал">
             <div class="element__description">
-              <h2 class="element__title">Дубай</h2>
-              <img class="element__like" src="./images/vector-like.svg" alt="Лайк">
+              <h2 class="element__title">Байкал</h2>
+              <img class="element__like element__like_active" src="./images/vector-like.svg" alt="Лайк">
             </div>
           </article>
           <article class="element">
-            <img class="element__image" src="./images/grozny.png" alt="Грозный">
+            <img class="element__image" src="./images/les.jpg" alt="Лес">
             <div class="element__description">
-              <h2 class="element__title">Грозный</h2>
-              <img class="element__like" src="./images/vector-like.svg" alt="Лайк">
+              <h2 class="element__title">Лес</h2>
+              <img class="element__like element__like_active" src="./images/vector-like.svg" alt="Лайк">
             </div> 
           </article>
           <article class="element">
-            <img class="element__image" src="./images/hong-kong.png" alt="Гонконг">
+            <img class="element__image" src="./images/dombai.jpg" alt="Домбай">
             <div class="element__description">
-              <h2 class="element__title">Гонконг</h2>
-              <img class="element__like" src="./images/vector-like.svg" alt="Лайк">
+              <h2 class="element__title">Домбай</h2>
+              <img class="element__like element__like_active" src="./images/vector-like.svg" alt="Лайк">
             </div>
           </article>
           <article class="element">
             <img class="element__image" src="./images/tula-lakes.png" alt="Тульские озера">
             <div class="element__description">
               <h2 class="element__title">Тульские озера</h2>
-              <img class="element__like" src="./images/vector-like.svg" alt="Лайк">
+              <img class="element__like element__like_active" src="./images/vector-like.svg" alt="Лайк">
             </div>
           </article>
           <article class="element">
-            <img class="element__image" src="./images/riodejaneiro.png" alt="Рио-де-Жанейро">
+            <img class="element__image" src="./images/uralmountains.jpg" alt="Уральские горы">
             <div class="element__description">
-              <h2 class="element__title">Рио-де-Жанейро</h2>
-              <img class="element__like" src="./images/vector-like.svg" alt="Лайк">
+              <h2 class="element__title">Уральские горы</h2>
+              <img class="element__like element__like_active" src="./images/vector-like.svg" alt="Лайк">
             </div>
           </article>
         </section>
       </main>
       <footer class="footer">
-        <p class="footer__copyright">© 2020 Mesto Russia</p>        
+        <p class="footer__copyright">&copy;&nbsp;2020 Mesto Russia</p>        
       </footer>
-          popup
+      <div class="popup popup__hidden">
+        <div class="popup__container">
+          <button aria-label="close" class="popup__button-close" type="button">Закрыть</button>
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <form class="popup__form" name="form-profile" novalidate>
+            <input
+            type="text"
+            name="popup-name"
+            class="popup__input popup__input_type_name"
+            placeholder="Жак-Ив Кусто"
+            required>
+            <span id="input-name-error" class="popup__error"></span>
+            <input
+            type="text"
+            name="popup-job"
+            class="popup__input popup__input_type_job"
+            placeholder="Исследователь океана"
+            required>
+            <button class="popup__button popup__button-submit" type="submit">Сохранить</button>
+          </form> 
+        </div>
+      </div>
     </div>
-       <script></script>
+       <script src="./scripts/script.js"></script>
   </body>
 </html>
 
