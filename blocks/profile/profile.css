@@ -123,8 +123,8 @@
 }
 
 .profile__edit-button:hover {
-  /* Прозрачный фон при наведении курсора */
-  background-color: transparent;
+  /* Прозрачный фон при наведениии курсора */
+  background-color: transparent;  
 }
 
 .profile__text {
@@ -140,7 +140,7 @@
   .profile__text {
     font-size: 14px;
     line-height: 17px;
-  }
+  } 
 }
 
 .profile__add-button {
