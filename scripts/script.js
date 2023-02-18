@@ -11,18 +11,18 @@ function formSave (evt) {
     evt.preventDefault(); 
     profileTitle.textContent = popupInputTypeName.value;
     profileText.textContent = popupInputTypeJob.value;
-    popup.classList.add('popup__hidden');
+    popup.classList.add('popup_hidden');
 }
 
 profileEditButton.addEventListener('click', function () {
-    popup.classList.remove('popup__hidden');
+    popup.classList.remove('popup_hidden');
     console.log(popup);
     popupInputTypeName.value = profileTitle.textContent;
     popupInputTypeJob.value = profileText.textContent;
 });
 
 popupButtonClose.addEventListener('click', function () {
-    popup.classList.add('popup__hidden');
+    popup.classList.add('popup_hidden');
 });
 
 popupForm.addEventListener('submit', formSave);
