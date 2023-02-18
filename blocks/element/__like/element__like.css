@@ -6,7 +6,7 @@
 }
 
 .element__like:hover {
-  transition: opacity .5s ease linear; 
+  transition: opacity .5s ease linear;
   opacity: 50%;
   background-color: transparent;  
 }

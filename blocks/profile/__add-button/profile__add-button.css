@@ -27,7 +27,7 @@
 }
 
 .profile__add-button:hover {
-  transition: opacity .5s ease linear; 
+  transition: opacity .5s ease linear;
   opacity: 60%;
   background-color: transparent;  
 }
