@@ -14,6 +14,8 @@
   display: flex;
 }
 
+
+
 .popup__hidden {
   /* display: none; */
 }
@@ -22,74 +24,116 @@
 .popup__container {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
   outline: solid 1px yellow;
   width: 430px;
   height: 330px;
   background-color: white;
-  /* box-sizing: border-box;   подсмотрел у кого то не А */
   border-radius: 10px;
   position: relative;
   margin: 0;
   padding: 0;
 }
 
+@media screen and (max-width: 600px) {
+  .popup__container {
+    width: 282px;
+    height: 322px;
+
+  }
+}
+
 .popup__button-close {
   outline: solid 1px red;
   background-image: url(../../images/close-icon.svg);
-  background-color: transparent; /* делает прозрачным фон */
+  background-color: transparent;
   background-repeat: no-repeat;
   position: absolute;
-  /* background-position: center; */
+  background-position: center;
   cursor: pointer;
   width: 32px;
   height: 32px;
   top: -40px;
   right: -40px;
-  /* margin: -40px -40px 0 0; */
-  /* display: block; скрыть "закрыть" не сработало */
-  /* visibility: hidden; аналогично но скрывает всю кнопку */
+  padding: 0;
+  opacity: 100%;
+  background-size: contain;
 }
+
+@media screen and (max-width: 600px) {
+  .popup__button-close {
+    width: 20px;
+    height: 20px;
+    top: -36px;
+    right: 0;
+  }
+}
+
+.popup__button-close:hover {
+  transition: opacity .5s ease linear; 
+  opacity: 80%;
+  background-color: transparent;  
+
+}  
 
 .popup__title {
 font-style: normal;
 font-weight: 900;
 font-size: 24px;
 line-height: 29px;
-margin: 34px auto 54px 36px;
+margin: 34px auto 48px 36px;
 }
+
+
+@media screen and (max-width: 600px) {
+  .popup__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 25px auto 75px 20px;
+
+  }
+}
+
+
 .popup__form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  outline: solid 1px red;
   margin: 0 0 37px 36px;
   height: 100%;
   overflow: hidden;
+  max-width: 358px;
+  width: 100%;
 }
+
+@media screen and (max-width: 600px) {
+  .popup__form {
+    max-width: 238px;
+    margin: 0 auto 25px 20px;
+
+  }
+}
+
 .popup__input {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   border: none;
+  width: 100%;
   border-bottom: 1px solid rgba(84, 84, 84, 0.2);
-}
-.popup__input_type_name {
+  padding: 0 0 9px;
   margin-bottom: 30px;
-  height: 27px;
+}
 
-}
-.popup__error {
-}
-.popup__input_type_job {
-  margin-bottom: 48px;
-  height: 27px;
+@media screen and (max-width: 600px) {
+  .popup__input {
+    padding-bottom: 8px;
+    margin-bottom: 31px;
 
+  }
 }
-.popup__button {
-}
+
+
 .popup__button-submit {
   font-style: normal;
   font-weight: 400;
@@ -101,8 +145,23 @@ margin: 34px auto 54px 36px;
   border-radius: 2px;
   width: 358px;
   height: 50px;
+  padding: 0;
+  margin: 19px 0 0;
+  opacity: 100%;
 }
 
-.popup__button-submit::hover {
-  
+@media screen and (max-width: 600px) {
+  .popup__button-submit {
+    font-size: 14px;
+    line-height: 17px;
+    width: 238px;
+    height: 46px;
+    margin-top: 15px;
+
+  }
+}
+
+.popup__button-submit:hover {
+  transition: opacity .5s ease linear; 
+  opacity: 80%;
 }

@@ -3,19 +3,19 @@ const editProfileButton = document.querySelector('.profile__edit-button');
 editProfileButton.addEventListener('click', function () {
     const editPopup = document.querySelector('.popup');
     console.log(editPopup);
-    editPopup.classList.add('popup_opened');
+    editPopup.classList.add('popup_opened'); // почему класс попап с кобках без точки?
 }); 
  
 const editPopupCloseButton = document.querySelector('.popup');
 editPopupCloseButton.addEventListener('click', function() {
     const editPopup = document.querySelector('.popup');
-    console.log(editPopup);
+    console.log(editPopup); 
     editPopup.classList.add('popup_opened');
 });
 
 
 // Находим поля формы в DOM
-let nameInput = // Воспользуйтесь инструментом .querySelector()
+let nameInput = document.querySelector('.popup__input_type_job');// Воспользуйтесь инструментом .querySelector()
 let jobInput = // Воспользуйтесь инструментом .querySelector()
 
 // Обработчик «отправки» формы, хотя пока
