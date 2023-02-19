@@ -9,8 +9,6 @@
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
   background: black;
-  /* background: rgb(114, 107, 107); */
   display: flex;
-  /* justify-content: center; */
   font-family: 'Inter', Arial, Helvetica, sans-serif;
 }

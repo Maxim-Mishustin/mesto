@@ -1,0 +1,6 @@
+.element__like_type_active {
+    cursor: pointer;
+    background-image: url(../../../../images/vector-like-active.svg);
+    background-repeat: no-repeat;
+  }
+  

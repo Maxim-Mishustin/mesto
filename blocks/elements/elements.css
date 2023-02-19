@@ -1,7 +1,6 @@
 .elements {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
-  grid-template-rows: 361px;
   grid-auto-flow: row;
   grid-auto-rows: 361px;
   gap: 20px 17px;
@@ -11,7 +10,7 @@
   padding: 0;
 }
 
-@media screen and (max-width: 1040px) {
+@media screen and (max-width: 1055px) {
   .elements {
     width: calc(100% - 100px*2);
   }

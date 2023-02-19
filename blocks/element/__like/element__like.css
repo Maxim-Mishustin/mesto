@@ -1,21 +1,18 @@
 .element__like {
   cursor: pointer;
+  background-image: url(../../../images/vector-like.svg);
   width: 22px;
-  padding: 5px 5px 1px 0;
+  margin: 3px 5px 0 0;
   opacity: 100%;
+  background-size: contain;
+  border: none;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
 }
 
 .element__like:hover {
-  transition: opacity .5s ease linear;
+  transition: opacity .5s ease;
   opacity: 50%;
   background-color: transparent;  
-}
-
-.element__like_active {
-  cursor: pointer;
-}
-
-.element__like_active:hover {
-  background-image: url(../../images/vector-like-active.svg);
-  background-repeat: no-repeat;
 }
