@@ -19,14 +19,13 @@
     max-width: 340px;
     width: 100%;
     background-size: 16px 16px;
-    margin: 80px auto auto;
-
+    margin: 50px auto auto;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 740px) {
   .profile__add-button {
-    margin-top: 0;
+    margin-top: 34px;
 
   }
 }
