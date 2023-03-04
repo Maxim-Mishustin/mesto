@@ -51,7 +51,7 @@ popupForm.addEventListener('submit', handleFormSubmit);
 
 
 // -------------------------------------------------------
-// добавление лайка
+
 
 
 
@@ -127,8 +127,37 @@ const createCard = card => {
   elementImage.setAttribute('src', card.link);
   console.log(elementImage);
 
+
+  // добавление функции удаления карточки
+  const deleteButton = newElement.querySelector('.element__delete');
+  deleteButton.addEventListener('click', handleDeleteButtonClick)
+
   elementGallery.prepend(newElement); // вынести в новую функцию
   
 };
 
 cards.forEach(createCard);
+
+// функция удаления карточки вынесенная отдельно
+function handleDeleteButtonClick(event) {
+  const button = event.target
+  const element = button.closest('.element')
+  element.remove()
+}
+
+
+
+
+// добавление лайка
+const elementLike = elementsTemplate.querySelector('.element__like');
+console.log(elementLike);
+
+function like() {
+  elementLike.classList.toggle('.element__like_active');
+  console.log(click);
+
+  elementLike.addEventListener('click', like);
+};
+
+
+
