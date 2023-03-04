@@ -49,27 +49,15 @@ popupButtonClose.addEventListener('click', closePopup);
 popupForm.addEventListener('submit', handleFormSubmit);
 
 
+
 // -------------------------------------------------------
+// добавление лайка
 
 
 
-// создание переменной для кнопки добавления карточки
+
+// создание переменной для кнопки добавления карточки Add
 const profileAddButton = document.querySelector('.profile__add-button');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -78,26 +66,69 @@ const profileAddButton = document.querySelector('.profile__add-button');
 const cards = [
   {
     name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+    alt: 'Архыз'
   },
   {
     name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
+    alt: 'Челябинская область'
   },
   {
     name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
+    alt: 'Иваново'
   },
   {
     name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
+    alt: 'Камчатка'
   },
   {
     name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
+    alt: 'Холмогорский район'
   },
   {
     name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
+    alt: 'Байкал'
   }
 ];
+
+
+
+// записали в переменную весь элементс
+const elementGallery = document.querySelector('.elements');
+console.log(elementGallery);
+
+// записали в переменную по айди весь темплейт с контентом
+const templateCards = document.querySelector('#templateCards').content;
+console.log(templateCards);
+
+const createCard = card => {
+  // записали в newElement весь темплейт по айди
+  const newElement = templateCards.cloneNode(true);
+  console.log(newElement);
+
+  // назначили переменную с заголовком темплейта
+  const elementTitle = newElement.querySelector('.element__title');
+  console.log(elementTitle);
+
+  // записали в переменную класс фото из темплейта
+  const elementImage = newElement.querySelector('.element__image');
+  console.log(elementImage);
+
+  // записали в elementTitle текст из массива
+  elementTitle.textContent = card.name;
+  console.log(elementTitle);
+
+  // задаём значение в elementImage фото по сслыке из массива
+  elementImage.setAttribute('src', card.link);
+  console.log(elementImage);
+
+  elementGallery.prepend(newElement); // вынести в новую функцию
+  
+};
+
+cards.forEach(createCard);
