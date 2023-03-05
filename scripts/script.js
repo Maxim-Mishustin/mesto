@@ -78,11 +78,9 @@ const addCardFormSubmit = evt => {
   const newCard = new Object();
   newCard.name = popupInputTypeNewPlace.value;
   newCard.link = popupInputTypeUrl.value;
+  newCard.alt = popupInputTypeNewPlace.value;
   addCard(newCard);
   closePopup(popupTypeAdd);
-  
-  // сброс значений в кнопке Add
-  document.getElementById('popupFormAdd').reset();
 };
 
 // функция удаления карточки вынесенная отдельно
@@ -125,6 +123,9 @@ popupForm.addEventListener('submit', handleFormSubmit);
 // добавили слушатель клика для закрытия PopupAdd
 profileAddButton.addEventListener('click', function () {
   popupTypeAdd.classList.add('popup_opened');
+
+  // сброс значений в кнопке Add
+  popupFormAdd.reset();
 });
 
 // вызов функции addcard на каждый элемент массива
