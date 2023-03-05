@@ -1,14 +1,14 @@
 .element__like {
   cursor: pointer;
   background-image: url(../../../images/vector-like.svg);
-  width: 22px;
   margin: 3px 5px 0 0;
   opacity: 100%;
-  background-size: contain;
+  background-size: auto;
   border: none;
   background-repeat: no-repeat;
   background-color: transparent;
   background-position: center;
+  min-width: 22px;
 }
 
 .element__like:hover {
