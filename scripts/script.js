@@ -58,7 +58,8 @@ const createCard = card => {
     popupCardImage.setAttribute('src', elementImage.src);
     popupCardTitle.textContent = card.name;
   });
-
+  
+  // лайк эктив
   const elementLike = newElement.querySelector('.element__like');
   elementLike.addEventListener('click', function(evt) {
     evt.target.classList.add('element__like_active');
@@ -79,6 +80,9 @@ const addCardFormSubmit = evt => {
   newCard.link = popupInputTypeUrl.value;
   addCard(newCard);
   closePopup(popupTypeAdd);
+  
+  // сброс значений в кнопке Add
+  document.getElementById('popupFormAdd').reset();
 };
 
 // функция удаления карточки вынесенная отдельно
@@ -128,3 +132,4 @@ cards.forEach(addCard);
 
 // вызов функции для кнопки создать
 popupFormAdd.addEventListener('submit', addCardFormSubmit);
+
