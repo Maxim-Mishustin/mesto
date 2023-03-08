@@ -16,17 +16,18 @@ const popupButtonCloseBigCard = document.querySelector('.popup__button-close-big
 const popupCardImage = document.querySelector('.popup__card-image');
 const popupCardTitle = document.querySelector('.popup__card-title');
 const profileTitle = document.querySelector('.profile__title');
+// про popup profile (кнопка edit)
 const popupInputTypeName = document.querySelector('.popup__input_type_name');
 const profileText = document.querySelector('.profile__text');
 const popupInputTypeJob = document.querySelector('.popup__input_type_job');
-const popupForm = document.querySelector('.popup__form');
+const popupProfileForm = document.querySelector('.popup__form-edit');
 // записали в переменную весь элементс
 const elementGallery = document.querySelector('.elements');
 // записали в переменную по айди весь темплейт с контентом
 const templateCards = document.querySelector('#templateCards').content;
 
 // функция submit сохранить 
-function handleFormSubmit (evt) {
+function handleProfileFormSubmit (evt) {
   evt.preventDefault();
   profileTitle.textContent = popupInputTypeName.value;
   profileText.textContent = popupInputTypeJob.value;
@@ -38,7 +39,12 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 };
 
-// функция создания карточки
+// функция открытия попапа общая
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+};
+
+// функция создания карточки |||||||||||||||||||||||||||||||||||||||||
 const createCard = card => {
   // записали в newElement темплейт с содержимым по айди
   const newElement = templateCards.cloneNode(true);
@@ -54,9 +60,10 @@ const createCard = card => {
   elementImage.setAttribute('alt', card.alt);
 
   elementImage.addEventListener('click', function () {
-    popupTypeBigCard.classList.add('popup_opened');
+    openPopup(popupTypeBigCard);
     popupCardImage.setAttribute('src', elementImage.src);
     popupCardTitle.textContent = card.name;
+    popupCardImage.setAttribute('alt', card.name);
   });
   
   // лайк эктив
@@ -71,6 +78,7 @@ const createCard = card => {
 
   return newElement;
 };
+
 
 // функция добавления карточки из формы
 const addCardFormSubmit = evt => {
@@ -97,7 +105,7 @@ const addCard = card => {
 
 // добавили слушатель клика для Edit
 profileEditButton.addEventListener('click', function () {
-  popupTypeEdit.classList.add('popup_opened');
+  openPopup(popupTypeEdit);
   popupInputTypeName.value = profileTitle.textContent;
   popupInputTypeJob.value = profileText.textContent;
 });
@@ -118,11 +126,11 @@ popupButtonCloseBigCard.addEventListener('click', function () {
 });
 
 // добавили слушатель для кнопки сохранить
-popupForm.addEventListener('submit', handleFormSubmit);
+popupProfileForm.addEventListener('submit', handleProfileFormSubmit);
 
-// добавили слушатель клика для закрытия PopupAdd
+// добавили слушатель клика для открытия PopupAdd
 profileAddButton.addEventListener('click', function () {
-  popupTypeAdd.classList.add('popup_opened');
+  openPopup(popupTypeAdd);
 
   // сброс значений в кнопке Add
   popupFormAdd.reset();
