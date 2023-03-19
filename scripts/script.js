@@ -33,9 +33,24 @@ function handleFormSubmit (evt) {
   closePopup(popupTypeEdit);
 };
 
+const closePopupEscape = (e) => {
+  if(e.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+    console.log(popup);
+    closePopup(popup);
+  }
+}
+
+// функция открытия попапа общая
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEscape);
+};
+
 // функция закрытия попапа общая
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEscape);
 };
 
 // функция создания карточки
@@ -54,7 +69,7 @@ const createCard = card => {
   elementImage.setAttribute('alt', card.alt);
 
   elementImage.addEventListener('click', function () {
-    popupTypeBigCard.classList.add('popup_opened');
+    openPopup(popupTypeBigCard);
     popupCardImage.setAttribute('src', elementImage.src);
     popupCardTitle.textContent = card.name;
   });
@@ -97,7 +112,7 @@ const addCard = card => {
 
 // добавили слушатель клика для Edit
 profileEditButton.addEventListener('click', function () {
-  popupTypeEdit.classList.add('popup_opened');
+  openPopup(popupTypeEdit);
   popupInputTypeName.value = profileTitle.textContent;
   popupInputTypeJob.value = profileText.textContent;
 });
@@ -122,7 +137,7 @@ popupForm.addEventListener('submit', handleFormSubmit);
 
 // добавили слушатель клика для закрытия PopupAdd
 profileAddButton.addEventListener('click', function () {
-  popupTypeAdd.classList.add('popup_opened');
+  openPopup(popupTypeAdd); 
 
   // сброс значений в кнопке Add
   popupFormAdd.reset();

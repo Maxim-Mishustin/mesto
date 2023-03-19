@@ -38,13 +38,13 @@
           <button aria-label="close" class="popup__button-close popup__button-close-edit" type="button"></button>
           <h2 class="popup__title">Редактировать профиль</h2>
           <form class="popup__form" name="form-profile">
-            <input type="text" name="popup-name" class="popup__input popup__input_type_name" placeholder="Имя"
+            <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя"
             required minlength="2" maxlength="40">
-            <span id="input-name-error" class=""></span>
-            <input type="text" name="popup-job" class="popup__input popup__input_type_job" placeholder="Профессия"
+            <span id="input-name-error" class="popup__input-error popup__input-error_type_name"></span>
+            <input type="text" name="job" class="popup__input popup__input_type_job" placeholder="Профессия"
             required minlength="2" maxlength="200">
-            <span class=""></span>
-            <button class="popup__button popup__button-submit" type="submit">Сохранить</button>
+            <span class="popup__input-error popup__input-error_type_job"></span>
+            <button class="popup__button popup__button-submit popup__button_type_disabled" type="submit">Сохранить</button>
           </form>
         </div>
       </div>
@@ -54,12 +54,12 @@
           <button aria-label="close" class="popup__button-close popup__button-close-add" type="button"></button>
           <h2 class="popup__title">Новое место</h2>
           <form class="popup__form popup__form-add" name="form-profile">
-            <input type="text" name="popup-new-place" class="popup__input popup__input_type_new-place" placeholder="Название"
+            <input type="text" name="new-place" class="popup__input popup__input_type_new-place" placeholder="Название"
             required minlength="2" maxlength="30">
-            <span id="input-name-error" class=""></span>
-            <input type="url" name="popup-url" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку"
+            <span id="input-name-error" class="popup__input-error popup__input-error_type_new-place"></span>
+            <input type="url" name="url" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку"
             required>
-            <span class=""></span>
+            <span class="popup__input-error popup__input-error_type_url"></span>
             <button class="popup__button popup__button-submit" type="submit">Создать</button>
           </form> 
         </div>
