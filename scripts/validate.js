@@ -30,7 +30,6 @@ const checkInputValidity = (input, errorClassTemplate, activeErrorClass) => {
 
 const hasInvalidInput = (inputList) => {
   return Array.from(inputList).some(input => !input.validity.valid);
-
 }
 
 const toggleButtonState = (submitButton, inactiveButtonClass, inputList) => {
@@ -58,11 +57,7 @@ const enableValidation = (config) => {
   const formElements = Array.from(document.querySelectorAll(config.formSelector));
   formElements.forEach(element => {
     setEventListeners(element, config.inputSelector, config.errorClassTemplate, config.activeErrorClass, config.submitButtonSelector, config.inactiveButtonClass);  
-
   });
-
-
-  // setEventListeners(form, inputList, config.errorClassTemplate, config.activeErrorClass, submitButton, config.inactiveButtonClass);  
 }
 
 // включение валидации вызовом enableValidation
