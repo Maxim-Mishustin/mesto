@@ -24,6 +24,16 @@ const popupForm = document.querySelector('.popup__form');
 const elementGallery = document.querySelector('.elements');
 // записали в переменную по айди весь темплейт с контентом
 const templateCards = document.querySelector('#templateCards').content;
+const popupAll = document.querySelectorAll('.popup');
+const closePopupOverflow = (popupAll) => {
+  popupAll.forEach(popup => {
+    popup.addEventListener('click', (e) => {
+      if(e.target === popup) {
+        closePopup(popup);
+      }
+    });
+  });
+};
 
 // функция submit сохранить 
 function handleFormSubmit (evt) {
@@ -36,7 +46,6 @@ function handleFormSubmit (evt) {
 const closePopupEscape = (e) => {
   if(e.key === 'Escape') {
     const popup = document.querySelector('.popup_opened');
-    console.log(popup);
     closePopup(popup);
   }
 }
@@ -96,6 +105,9 @@ const addCardFormSubmit = evt => {
   newCard.alt = popupInputTypeNewPlace.value;
   addCard(newCard);
   closePopup(popupTypeAdd);
+  const addCardFormSubmitButton = popupTypeAdd.querySelector('.popup__button-submit');
+  addCardFormSubmitButton.classList.add('popup__button_type_disabled');
+  addCardFormSubmitButton.disabled = true;
 };
 
 // функция удаления карточки вынесенная отдельно
@@ -149,3 +161,4 @@ cards.forEach(addCard);
 // вызов функции для кнопки создать
 popupFormAdd.addEventListener('submit', addCardFormSubmit);
 
+closePopupOverflow(popupAll);

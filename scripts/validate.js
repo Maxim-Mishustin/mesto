@@ -5,7 +5,6 @@ const showInputError = (errorTextElement, validationMessage, activeErrorClass) =
 
 const hideInputError = (errorTextElement, activeErrorClass) => {
   errorTextElement.classList.remove(activeErrorClass);
-  console.log(errorTextElement);
   errorTextElement.textContent = '';
 }
 
@@ -19,9 +18,9 @@ const enableButton = (submitButton, inactiveButtonClass) => {
   submitButton.disabled = false;
 }
 
+// функция проверки валидности поля
 const checkInputValidity = (input, errorClassTemplate, activeErrorClass) => {
   const errorTextElement = document.querySelector(`${errorClassTemplate}${input.name}`);
-  console.log(errorTextElement);
   if(!input.validity.valid) {
     showInputError(errorTextElement, input.validationMessage, activeErrorClass);
   } else {
@@ -30,8 +29,6 @@ const checkInputValidity = (input, errorClassTemplate, activeErrorClass) => {
 }
 
 const hasInvalidInput = (inputList) => {
-  console.log(inputList);
-  console.log(Array.from(inputList).some(input => !input.validity.valid));
   return Array.from(inputList).some(input => !input.validity.valid);
 
 }
@@ -42,7 +39,6 @@ const toggleButtonState = (submitButton, inactiveButtonClass, inputList) => {
   } else {
     enableButton(submitButton, inactiveButtonClass);
   }
-  console.log(submitButton);
 }
 
 const setEventListeners = (element, inputSelector, errorClassTemplate, activeErrorClass, submitButtonSelector, inactiveButtonClass) => {
@@ -60,7 +56,6 @@ const setEventListeners = (element, inputSelector, errorClassTemplate, activeErr
 
 const enableValidation = (config) => {
   const formElements = Array.from(document.querySelectorAll(config.formSelector));
-  console.log(formElements);
   formElements.forEach(element => {
     setEventListeners(element, config.inputSelector, config.errorClassTemplate, config.activeErrorClass, config.submitButtonSelector, config.inactiveButtonClass);  
 
@@ -76,11 +71,9 @@ enableValidation({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   errorClassTemplate: '.popup__input-error_type_',
-  activeErrorClass: 'popup__input-error',
+  activeErrorClass: 'popup__input-error_type_active',
   submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_type_disabled',
-  
-  inputErrorClass: 'popup__input_type_error'
+  inactiveButtonClass: 'popup__button_type_disabled'
 });
 
 
