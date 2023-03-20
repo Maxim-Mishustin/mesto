@@ -25,6 +25,16 @@ const popupProfileForm = document.querySelector('.popup__form-edit');
 const elementGallery = document.querySelector('.elements');
 // записали в переменную по айди весь темплейт с контентом
 const templateCards = document.querySelector('#templateCards').content;
+const popupAll = document.querySelectorAll('.popup');
+const closePopupOverflow = (popupAll) => {
+  popupAll.forEach(popup => {
+    popup.addEventListener('click', (e) => {
+      if(e.target === popup) {
+        closePopup(popup);
+      }
+    });
+  });
+};
 
 // функция submit сохранить 
 function handleProfileFormSubmit (evt) {
@@ -34,9 +44,23 @@ function handleProfileFormSubmit (evt) {
   closePopup(popupTypeEdit);
 };
 
+const closePopupEscape = (e) => {
+  if(e.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
+}
+
+// функция открытия попапа общая
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEscape);
+};
+
 // функция закрытия попапа общая
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEscape);
 };
 
 // функция открытия попапа общая
@@ -89,6 +113,9 @@ const addCardFormSubmit = evt => {
   newCard.alt = popupInputTypeNewPlace.value;
   addCard(newCard);
   closePopup(popupTypeAdd);
+  const addCardFormSubmitButton = popupTypeAdd.querySelector('.popup__button-submit');
+  addCardFormSubmitButton.classList.add('popup__button_type_disabled');
+  addCardFormSubmitButton.disabled = true;
 };
 
 // функция удаления карточки вынесенная отдельно
@@ -130,7 +157,11 @@ popupProfileForm.addEventListener('submit', handleProfileFormSubmit);
 
 // добавили слушатель клика для открытия PopupAdd
 profileAddButton.addEventListener('click', function () {
+<<<<<<< HEAD
   openPopup(popupTypeAdd);
+=======
+  openPopup(popupTypeAdd); 
+>>>>>>> develop
 
   // сброс значений в кнопке Add
   popupFormAdd.reset();
@@ -142,3 +173,4 @@ cards.forEach(addCard);
 // вызов функции для кнопки создать
 popupFormAdd.addEventListener('submit', addCardFormSubmit);
 
+closePopupOverflow(popupAll);
