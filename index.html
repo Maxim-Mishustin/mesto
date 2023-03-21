@@ -31,40 +31,44 @@
       <footer class="footer">
         <p class="footer__copyright">&copy;&nbsp;2020 Mesto Russia</p>
       </footer>
-
-      <!-- Popup edit -->
+      <!-- popup редактирования профиля -->
       <div class="popup popup_type_edit">
         <div class="popup__container">
           <button aria-label="close" class="popup__button-close popup__button-close-edit" type="button"></button>
-          <h2 class="popup__title">Редактировать профиль</h2>
           <form class="popup__form" name="form-profile">
-            <input type="text" name="popup-name" class="popup__input popup__input_type_name" placeholder="Имя">
-            <span id="input-name-error"></span>
-            <input type="text" name="popup-job" class="popup__input popup__input_type_job" placeholder="Профессия">
-            <button class="popup__button popup__button-submit" type="submit">Сохранить</button>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <input type="text" name="name" class="popup__input popup__input_type_name"
+              placeholder="Имя" required minlength="2" maxlength="40" autocomplete="off"/>
+            <span id="input-name-error" class="popup__input-error popup__input-error_type_name"></span>
+            <input type="text" name="job" class="popup__input popup__input_type_job"
+              placeholder="Профессия" required minlength="2" maxlength="200" autocomplete="off"/>
+            <span class="popup__input-error popup__input-error_type_job"></span>
+            <button class="popup__button popup__button-submit popup__button_type_disabled" type="submit">Сохранить</button>
           </form>
         </div>
       </div>
-      <!-- popup добавления карточки -->
+      <!-- popup добавления карточкии -->
       <div class="popup popup_type_add">
         <div class="popup__container">
           <button aria-label="close" class="popup__button-close popup__button-close-add" type="button"></button>
-          <h2 class="popup__title">Новое место</h2>
           <form class="popup__form popup__form-add" name="form-profile">
-            <input type="text" name="popup-new-place" class="popup__input popup__input_type_new-place" placeholder="Название">
-            <span id="input-name-error"></span>
-            <input type="text" name="popup-url" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку">
+            <h2 class="popup__title">Новое место</h2>
+            <input type="text" name="new-place" class="popup__input popup__input_type_new-place"
+              placeholder="Название" required minlength="2" maxlength="30"/>
+              <span id="input-name-error" class="popup__input-error popup__input-error_type_new-place"></span>
+            <input type="url" name="url" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" required/>
+            <span class="popup__input-error popup__input-error_type_url"></span>
             <button class="popup__button popup__button-submit" type="submit">Создать</button>
           </form>
         </div>
       </div>
-      <!-- popup для большой карточкии -->
+      <!-- popup для большой карточки -->
       <div class="popup popup_type_big-card">
-        <div class="popup__container-big-card">
+        <div class="popup__container_big-card">
           <figure class="popup__card-caption">
             <img class="popup__card-image"/>
             <figcaption class="popup__card-title"></figcaption>
-          </figure>          
+          </figure>
           <button aria-label="close" class="popup__button-close popup__button-close-big-card" type="button"></button>
         </div>
       </div>

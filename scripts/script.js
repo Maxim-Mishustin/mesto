@@ -16,11 +16,10 @@ const popupButtonCloseBigCard = document.querySelector('.popup__button-close-big
 const popupCardImage = document.querySelector('.popup__card-image');
 const popupCardTitle = document.querySelector('.popup__card-title');
 const profileTitle = document.querySelector('.profile__title');
-// про popup profile (кнопка edit)
 const popupInputTypeName = document.querySelector('.popup__input_type_name');
 const profileText = document.querySelector('.profile__text');
 const popupInputTypeJob = document.querySelector('.popup__input_type_job');
-const popupProfileForm = document.querySelector('.popup__form-edit');
+const popupForm = document.querySelector('.popup__form');
 // записали в переменную весь элементс
 const elementGallery = document.querySelector('.elements');
 // записали в переменную по айди весь темплейт с контентом
@@ -37,7 +36,7 @@ const closePopupOverflow = (popupAll) => {
 };
 
 // функция submit сохранить 
-function handleProfileFormSubmit (evt) {
+function handleFormSubmit (evt) {
   evt.preventDefault();
   profileTitle.textContent = popupInputTypeName.value;
   profileText.textContent = popupInputTypeJob.value;
@@ -63,12 +62,7 @@ function closePopup(popup) {
   document.removeEventListener('keydown', closePopupEscape);
 };
 
-// функция открытия попапа общая
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-};
-
-// функция создания карточки |||||||||||||||||||||||||||||||||||||||||
+// функция создания карточки
 const createCard = card => {
   // записали в newElement темплейт с содержимым по айди
   const newElement = templateCards.cloneNode(true);
@@ -87,7 +81,6 @@ const createCard = card => {
     openPopup(popupTypeBigCard);
     popupCardImage.setAttribute('src', elementImage.src);
     popupCardTitle.textContent = card.name;
-    popupCardImage.setAttribute('alt', card.name);
   });
   
   // лайк эктив
@@ -102,7 +95,6 @@ const createCard = card => {
 
   return newElement;
 };
-
 
 // функция добавления карточки из формы
 const addCardFormSubmit = evt => {
@@ -153,15 +145,11 @@ popupButtonCloseBigCard.addEventListener('click', function () {
 });
 
 // добавили слушатель для кнопки сохранить
-popupProfileForm.addEventListener('submit', handleProfileFormSubmit);
+popupForm.addEventListener('submit', handleFormSubmit);
 
-// добавили слушатель клика для открытия PopupAdd
+// добавили слушатель клика для закрытия PopupAdd
 profileAddButton.addEventListener('click', function () {
-<<<<<<< HEAD
-  openPopup(popupTypeAdd);
-=======
   openPopup(popupTypeAdd); 
->>>>>>> develop
 
   // сброс значений в кнопке Add
   popupFormAdd.reset();
