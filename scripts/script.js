@@ -25,6 +25,8 @@ const elementGallery = document.querySelector('.elements');
 // записали в переменную по айди весь темплейт с контентом
 const templateCards = document.querySelector('#templateCards').content;
 const popupAll = document.querySelectorAll('.popup');
+
+// функция закрытия попапа при клике за пределы попапа
 const closePopupOverflow = (popupAll) => {
   popupAll.forEach(popup => {
     popup.addEventListener('click', (e) => {
@@ -81,12 +83,13 @@ const createCard = card => {
     openPopup(popupTypeBigCard);
     popupCardImage.setAttribute('src', elementImage.src);
     popupCardTitle.textContent = card.name;
+    popupCardImage.setAttribute('alt', card.name);
   });
   
-  // лайк эктив
+  // лайк эктив и дизэктив
   const elementLike = newElement.querySelector('.element__like');
   elementLike.addEventListener('click', function(evt) {
-    evt.target.classList.add('element__like_active');
+    evt.target.classList.toggle('element__like_active');
   });
 
   // добавление функции удаления карточки
@@ -105,9 +108,8 @@ const addCardFormSubmit = evt => {
   newCard.alt = popupInputTypeNewPlace.value;
   addCard(newCard);
   closePopup(popupTypeAdd);
-  const addCardFormSubmitButton = popupTypeAdd.querySelector('.popup__button-submit');
-  addCardFormSubmitButton.classList.add('popup__button_type_disabled');
-  addCardFormSubmitButton.disabled = true;
+  evt.submitter.classList.add('popup__button_type_disabled');
+  evt.submitter.disabled = true;
 };
 
 // функция удаления карточки вынесенная отдельно
