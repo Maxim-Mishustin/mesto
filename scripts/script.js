@@ -25,6 +25,14 @@ const elementGallery = document.querySelector('.elements');
 // записали в переменную по айди весь темплейт с контентом
 const templateCards = document.querySelector('#templateCards').content;
 const popupAll = document.querySelectorAll('.popup');
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  errorClassTemplate: '.popup__input-error_type_',
+  activeErrorClass: 'popup__input-error_type_active',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_type_disabled'
+}
 
 // функция закрытия попапа при клике за пределы попапа
 const closePopupOverflow = (popupAll) => {
@@ -64,49 +72,113 @@ function closePopup(popup) {
   document.removeEventListener('keydown', closePopupEscape);
 };
 
-// функция создания карточки
-const createCard = card => {
-  // записали в newElement темплейт с содержимым по айди
-  const newElement = templateCards.cloneNode(true);
+// создаем класс карточки, в конструктор которого передаем название, ссылку на изобр, альт и шаблон
+class Card {
+  constructor(name, alt, link, cardTemplate, handleBigCardPopup) {
+      this._name = name;
+      this._alt = alt;
+      this._link = link;
+      this._cardTemplate = cardTemplate;
+      this._handleBigCardPopup = handleBigCardPopup; 
+  }
 
-  // назначили переменную с заголовком темплейта
-  const elementTitle = newElement.querySelector('.element__title');
-  // записали в переменную класс фото из темплейта
-  const elementImage = newElement.querySelector('.element__image');
-  // записали в elementTitle текст из массива
-  elementTitle.textContent = card.name;
-  // задаём значение в elementImage фото по сслыке из массива
-  elementImage.setAttribute('src', card.link);
-  elementImage.setAttribute('alt', card.alt);
+// создаем метод который возращает шаблон новой карточки
+  _getTemplate() {
+      const newCardTemplate = this._cardTemplate.querySelector('.element').cloneNode(true);
+      console.log(newCardTemplate)
 
-  elementImage.addEventListener('click', function () {
-    openPopup(popupTypeBigCard);
-    popupCardImage.setAttribute('src', elementImage.src);
-    popupCardTitle.textContent = card.name;
-    popupCardImage.setAttribute('alt', card.name);
-  });
+      return newCardTemplate;
+      }
+
+// метод добавления слушателя на элементы карточки
+  _setEventListeners() {
+    this._initialCard.querySelector('.element__like').addEventListener('click', () => {this._setLikeButton()})
+    this._initialCard.querySelector('.element__delete').addEventListener('click', () => {this._setDeleteButton()})
+    this._initialCard.querySelector('.element__image').addEventListener('click', () => {this._handleBigCardPopup(this._name, this._link)})
+  }
+
+// реализация рабочего лайка
+  _setLikeButton() {
+    this._initialCard.querySelector('.element__like').classList.toggle('element__like_active'); // выбираем лайк внутри каждой карточки. + тагл
+  } 
   
-  // лайк эктив и дизэктив
-  const elementLike = newElement.querySelector('.element__like');
-  elementLike.addEventListener('click', function(evt) {
-    evt.target.classList.toggle('element__like_active');
-  });
+// метод удаления карточки
+  _setDeleteButton() {
+    this._initialCard.querySelector('.element__delete').closest('.element').remove();
+  }
 
-  // добавление функции удаления карточки
-  const deleteButton = newElement.querySelector('.element__delete');
-  deleteButton.addEventListener('click', handleDeleteButtonClick);
+// публ метод к-й заполнит шаблон новой карточки необходимыми данными (картинка, название и тд)
+  createInitialCard() {
+      this._initialCard = this._getTemplate(); // записываем в переменную шаблон новой карточки
+      this._setEventListeners();
+      this._initialCard.querySelector('.element__image').src = this._link;
+      this._initialCard.querySelector('.element__title').textContent = this._name;
+      this._initialCard.querySelector('.element__image').alt = this._alt;
 
-  return newElement;
-};
+      return this._initialCard;
+  }    
+
+}
+
+// ф-я открытия большой карточки
+const handleBigCardPopup = (name, link) => {
+  openPopup(popupTypeBigCard);
+  popupCardImage.setAttribute('src', link);
+  popupCardTitle.textContent = name;
+  popupCardImage.setAttribute('alt', name);
+}  
+
+// проходим по массиву методом форИч и создаем на основе элемента массива карточку (в начале)  
+cards.forEach (item => {
+    const card = new Card(item.name, item.alt, item.link, templateCards, handleBigCardPopup);
+    const initialCard = card.createInitialCard();
+    elementGallery.prepend(initialCard);
+
+});
+
+// // функция создания карточки
+// const createCard = card => {
+//   // записали в newElement темплейт с содержимым по айди
+//   const newElement = templateCards.cloneNode(true);
+
+//   // назначили переменную с заголовком темплейта
+//   const elementTitle = newElement.querySelector('.element__title');
+//   // записали в переменную класс фото из темплейта
+//   const elementImage = newElement.querySelector('.element__image');
+//   // записали в elementTitle текст из массива
+//   elementTitle.textContent = card.name;
+//   // задаём значение в elementImage фото по сслыке из массива
+//   elementImage.setAttribute('src', card.link);
+//   elementImage.setAttribute('alt', card.alt);
+
+//   elementImage.addEventListener('click', function () {
+//     openPopup(popupTypeBigCard);
+//     popupCardImage.setAttribute('src', elementImage.src);
+//     popupCardTitle.textContent = card.name;
+//     popupCardImage.setAttribute('alt', card.name);
+//   });
+  
+//   // лайк эктив и дизэктив
+//   const elementLike = newElement.querySelector('.element__like');
+//   elementLike.addEventListener('click', function(evt) {
+//     evt.target.classList.toggle('element__like_active');
+//   });
+
+//   // добавление функции удаления карточки
+//   const deleteButton = newElement.querySelector('.element__delete');
+//   deleteButton.addEventListener('click', handleDeleteButtonClick);
+
+//   return newElement;
+// };
 
 // функция добавления карточки из формы
 const addCardFormSubmit = evt => {
   evt.preventDefault();
-  const newCard = new Object();
-  newCard.name = popupInputTypeNewPlace.value;
-  newCard.link = popupInputTypeUrl.value;
-  newCard.alt = popupInputTypeNewPlace.value;
-  addCard(newCard);
+  // const newCard = new Object();
+  // newCard.name = popupInputTypeNewPlace.value;  // вот это удалить
+  // newCard.link = popupInputTypeUrl.value;
+  // newCard.alt = popupInputTypeNewPlace.value;
+  // addCard(newCard);
   closePopup(popupTypeAdd);
   evt.submitter.classList.add('popup__button_type_disabled');
   evt.submitter.disabled = true;
@@ -119,10 +191,10 @@ function handleDeleteButtonClick(event) {
   element.remove()
 };
 
-// функция добавления карточки в dom
-const addCard = card => {
-  elementGallery.prepend(createCard(card));
-};
+// // функция добавления карточки в dom
+// const addCard = card => {
+//   elementGallery.prepend(createCard(card));
+// };
 
 // добавили слушатель клика для Edit
 profileEditButton.addEventListener('click', function () {
@@ -157,10 +229,13 @@ profileAddButton.addEventListener('click', function () {
   popupFormAdd.reset();
 });
 
-// вызов функции addcard на каждый элемент массива
-cards.forEach(addCard);
+// // вызов функции addcard на каждый элемент массива
+// cards.forEach(addCard);
 
 // вызов функции для кнопки создать
 popupFormAdd.addEventListener('submit', addCardFormSubmit);
 
 closePopupOverflow(popupAll);
+
+
+
