@@ -1,3 +1,8 @@
+import { cards } from "./constants.js";
+import { FormValidator } from "./formValidator.js";
+import { Card } from "./card.js";
+
+
 const profileEditButton = document.querySelector('.profile__edit-button');
 const popupTypeEdit = document.querySelector('.popup_type_edit');
 const popupButtonCloseEdit = document.querySelector('.popup__button-close-edit');
@@ -25,13 +30,17 @@ const elementGallery = document.querySelector('.elements');
 // записали в переменную по айди весь темплейт с контентом
 const templateCards = document.querySelector('#templateCards').content;
 const popupAll = document.querySelectorAll('.popup');
+const formList = Array.from(document.querySelectorAll('.popup__form'));
+const formsValidators = {};
+
 const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   errorClassTemplate: '.popup__input-error_type_',
   activeErrorClass: 'popup__input-error_type_active',
   submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_type_disabled'
+  inactiveButtonClass: 'popup__button_type_disabled',
+  errorElementSelector: '.popup__input-error'
 }
 
 // функция закрытия попапа при клике за пределы попапа
@@ -72,54 +81,6 @@ function closePopup(popup) {
   document.removeEventListener('keydown', closePopupEscape);
 };
 
-// создаем класс карточки, в конструктор которого передаем название, ссылку на изобр, альт и шаблон
-class Card {
-  constructor(name, alt, link, cardTemplate, handleBigCardPopup) {
-      this._name = name;
-      this._alt = alt;
-      this._link = link;
-      this._cardTemplate = cardTemplate;
-      this._handleBigCardPopup = handleBigCardPopup; 
-  }
-
-// создаем метод который возращает шаблон новой карточки
-  _getTemplate() {
-      const newCardTemplate = this._cardTemplate.querySelector('.element').cloneNode(true);
-      console.log(newCardTemplate)
-
-      return newCardTemplate;
-      }
-
-// метод добавления слушателя на элементы карточки
-  _setEventListeners() {
-    this._initialCard.querySelector('.element__like').addEventListener('click', () => {this._setLikeButton()})
-    this._initialCard.querySelector('.element__delete').addEventListener('click', () => {this._setDeleteButton()})
-    this._initialCard.querySelector('.element__image').addEventListener('click', () => {this._handleBigCardPopup(this._name, this._link)})
-  }
-
-// реализация рабочего лайка
-  _setLikeButton() {
-    this._initialCard.querySelector('.element__like').classList.toggle('element__like_active'); // выбираем лайк внутри каждой карточки. + тагл
-  } 
-  
-// метод удаления карточки
-  _setDeleteButton() {
-    this._initialCard.querySelector('.element__delete').closest('.element').remove();
-  }
-
-// публ метод к-й заполнит шаблон новой карточки необходимыми данными (картинка, название и тд)
-  createInitialCard() {
-      this._initialCard = this._getTemplate(); // записываем в переменную шаблон новой карточки
-      this._setEventListeners();
-      this._initialCard.querySelector('.element__image').src = this._link;
-      this._initialCard.querySelector('.element__title').textContent = this._name;
-      this._initialCard.querySelector('.element__image').alt = this._alt;
-
-      return this._initialCard;
-  }    
-
-}
-
 // ф-я открытия большой карточки
 const handleBigCardPopup = (name, link) => {
   openPopup(popupTypeBigCard);
@@ -136,49 +97,9 @@ cards.forEach (item => {
 
 });
 
-// // функция создания карточки
-// const createCard = card => {
-//   // записали в newElement темплейт с содержимым по айди
-//   const newElement = templateCards.cloneNode(true);
-
-//   // назначили переменную с заголовком темплейта
-//   const elementTitle = newElement.querySelector('.element__title');
-//   // записали в переменную класс фото из темплейта
-//   const elementImage = newElement.querySelector('.element__image');
-//   // записали в elementTitle текст из массива
-//   elementTitle.textContent = card.name;
-//   // задаём значение в elementImage фото по сслыке из массива
-//   elementImage.setAttribute('src', card.link);
-//   elementImage.setAttribute('alt', card.alt);
-
-//   elementImage.addEventListener('click', function () {
-//     openPopup(popupTypeBigCard);
-//     popupCardImage.setAttribute('src', elementImage.src);
-//     popupCardTitle.textContent = card.name;
-//     popupCardImage.setAttribute('alt', card.name);
-//   });
-  
-//   // лайк эктив и дизэктив
-//   const elementLike = newElement.querySelector('.element__like');
-//   elementLike.addEventListener('click', function(evt) {
-//     evt.target.classList.toggle('element__like_active');
-//   });
-
-//   // добавление функции удаления карточки
-//   const deleteButton = newElement.querySelector('.element__delete');
-//   deleteButton.addEventListener('click', handleDeleteButtonClick);
-
-//   return newElement;
-// };
-
 // функция добавления карточки из формы
 const addCardFormSubmit = evt => {
   evt.preventDefault();
-  // const newCard = new Object();
-  // newCard.name = popupInputTypeNewPlace.value;  // вот это удалить
-  // newCard.link = popupInputTypeUrl.value;
-  // newCard.alt = popupInputTypeNewPlace.value;
-  // addCard(newCard);
   closePopup(popupTypeAdd);
   evt.submitter.classList.add('popup__button_type_disabled');
   evt.submitter.disabled = true;
@@ -191,16 +112,12 @@ function handleDeleteButtonClick(event) {
   element.remove()
 };
 
-// // функция добавления карточки в dom
-// const addCard = card => {
-//   elementGallery.prepend(createCard(card));
-// };
-
 // добавили слушатель клика для Edit
 profileEditButton.addEventListener('click', function () {
   openPopup(popupTypeEdit);
   popupInputTypeName.value = profileTitle.textContent;
   popupInputTypeJob.value = profileText.textContent;
+  formsValidators[popupForm.getAttribute('name')].resetValidation();
 });
 
 // добавили слушатель для кнопки закрытия Edit
@@ -223,19 +140,22 @@ popupForm.addEventListener('submit', handleFormSubmit);
 
 // добавили слушатель клика для закрытия PopupAdd
 profileAddButton.addEventListener('click', function () {
-  openPopup(popupTypeAdd); 
-
-  // сброс значений в кнопке Add
-  popupFormAdd.reset();
+  openPopup(popupTypeAdd);
+  formsValidators[popupFormAdd.getAttribute('name')].resetValidation();
 });
-
-// // вызов функции addcard на каждый элемент массива
-// cards.forEach(addCard);
 
 // вызов функции для кнопки создать
 popupFormAdd.addEventListener('submit', addCardFormSubmit);
 
 closePopupOverflow(popupAll);
 
+const enableValidation = config => {
+  formList.forEach(form => {
+    const validation = new FormValidator(form, config);
+    const formName = form.getAttribute('name');
+    formsValidators[formName] = validation;
+    validation.enableValidation();
+  })
+}
 
-
+enableValidation(config);
