@@ -94,15 +94,14 @@ cards.forEach (item => {
     const card = new Card(item.name, item.alt, item.link, templateCards, handleBigCardPopup);
     const initialCard = card.createInitialCard();
     elementGallery.prepend(initialCard);
-
 });
 
 // функция добавления карточки из формы
 const addCardFormSubmit = evt => {
   evt.preventDefault();
+  elementGallery.prepend(createNewCard(popupInputTypeNewPlace.value, popupInputTypeUrl.value));
   closePopup(popupTypeAdd);
-  evt.submitter.classList.add('popup__button_type_disabled');
-  evt.submitter.disabled = true;
+  popupFormAdd.reset();
 };
 
 // функция удаления карточки вынесенная отдельно
@@ -156,6 +155,12 @@ const enableValidation = config => {
     formsValidators[formName] = validation;
     validation.enableValidation();
   })
+}
+
+const createNewCard = (name, link) => {
+  const card = new Card(name, name, link, templateCards, handleBigCardPopup);
+  const newCardItem = card.createInitialCard();
+  return newCardItem;
 }
 
 enableValidation(config);
