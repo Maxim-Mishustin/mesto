@@ -24,7 +24,7 @@ const profileTitle = document.querySelector('.profile__title');
 const popupInputTypeName = document.querySelector('.popup__input_type_name');
 const profileText = document.querySelector('.profile__text');
 const popupInputTypeJob = document.querySelector('.popup__input_type_job');
-const popupForm = document.querySelector('.popup__form');
+const formEditProfile = document.querySelector('.popup__form');
 // записали в переменную весь элементс
 const elementGallery = document.querySelector('.elements');
 // записали в переменную по айди весь темплейт с контентом
@@ -55,7 +55,7 @@ const closePopupOverflow = (popupAll) => {
 };
 
 // функция submit сохранить 
-function handleFormSubmit (evt) {
+function submitEditProfileForm (evt) {
   evt.preventDefault();
   profileTitle.textContent = popupInputTypeName.value;
   profileText.textContent = popupInputTypeJob.value;
@@ -89,17 +89,22 @@ const handleBigCardPopup = (name, link) => {
   popupCardImage.setAttribute('alt', name);
 }  
 
+// ф-я создания карточки
+const createNewCard = (name, link, alt) => {
+  const card = new Card(name, alt, link, templateCards, handleBigCardPopup);
+  const newCardItem = card.createInitialCard();
+  return newCardItem;
+}
+
 // проходим по массиву методом форИч и создаем на основе элемента массива карточку (в начале)  
 cards.forEach (item => {
-    const card = new Card(item.name, item.alt, item.link, templateCards, handleBigCardPopup);
-    const initialCard = card.createInitialCard();
-    elementGallery.prepend(initialCard);
+    elementGallery.prepend(createNewCard(item.name, item.link, item.alt));
 });
 
 // функция добавления карточки из формы
 const addCardFormSubmit = evt => {
   evt.preventDefault();
-  elementGallery.prepend(createNewCard(popupInputTypeNewPlace.value, popupInputTypeUrl.value));
+  elementGallery.prepend(createNewCard(popupInputTypeNewPlace.value, popupInputTypeUrl.value, popupInputTypeNewPlace.value));
   closePopup(popupTypeAdd);
   popupFormAdd.reset();
 };
@@ -116,7 +121,7 @@ profileEditButton.addEventListener('click', function () {
   openPopup(popupTypeEdit);
   popupInputTypeName.value = profileTitle.textContent;
   popupInputTypeJob.value = profileText.textContent;
-  formsValidators[popupForm.getAttribute('name')].resetValidation();
+  formsValidators[formEditProfile.getAttribute('name')].resetValidation();
 });
 
 // добавили слушатель для кнопки закрытия Edit
@@ -135,7 +140,7 @@ popupButtonCloseBigCard.addEventListener('click', function () {
 });
 
 // добавили слушатель для кнопки сохранить
-popupForm.addEventListener('submit', handleFormSubmit);
+formEditProfile.addEventListener('submit', submitEditProfileForm);
 
 // добавили слушатель клика для закрытия PopupAdd
 profileAddButton.addEventListener('click', function () {
@@ -155,12 +160,6 @@ const enableValidation = config => {
     formsValidators[formName] = validation;
     validation.enableValidation();
   })
-}
-
-const createNewCard = (name, link) => {
-  const card = new Card(name, name, link, templateCards, handleBigCardPopup);
-  const newCardItem = card.createInitialCard();
-  return newCardItem;
 }
 
 enableValidation(config);

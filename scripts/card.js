@@ -20,7 +20,7 @@ export class Card {
     _setEventListeners() {
       this._initialCard.querySelector('.element__like').addEventListener('click', () => {this._setLikeButton()})
       this._initialCard.querySelector('.element__delete').addEventListener('click', () => {this._setDeleteButton()})
-      this._initialCard.querySelector('.element__image').addEventListener('click', () => {this._handleBigCardPopup(this._name, this._link)})
+      this._elementImage.addEventListener('click', () => {this._handleBigCardPopup(this._name, this._link)})
     }
   
   // реализация рабочего лайка
@@ -36,10 +36,11 @@ export class Card {
   // публ метод к-й заполнит шаблон новой карточки необходимыми данными (картинка, название и тд)
     createInitialCard() {
         this._initialCard = this._getTemplate(); // записываем в переменную шаблон новой карточки
+        this._elementImage = this._initialCard.querySelector('.element__image')
         this._setEventListeners();
-        this._initialCard.querySelector('.element__image').src = this._link;
+        this._elementImage.src = this._link;
         this._initialCard.querySelector('.element__title').textContent = this._name;
-        this._initialCard.querySelector('.element__image').alt = this._alt;
+        this._elementImage.alt = this._alt;
   
         return this._initialCard;
     }    
