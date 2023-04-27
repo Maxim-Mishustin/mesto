@@ -52,33 +52,36 @@
             class="popup__button-close popup__button-close-edit"
             type="button"
           ></button>
-          <form class="popup__form" name="form-profile">
+          <form class="popup__form" name="formProfile">
             <h2 class="popup__title">Редактировать профиль</h2>
-            <input
-              type="text"
-              name="name"
-              class="popup__input popup__input_type_name"
-              placeholder="Имя"
-              required
-              minlength="2"
-              maxlength="40"
-              autocomplete="off"
-            />
-            <span
-              id="input-name-error"
-              class="popup__input-error popup__input-error_type_name"
-            ></span>
-            <input
-              type="text"
-              name="job"
-              class="popup__input popup__input_type_job"
-              placeholder="Профессия"
-              required
-              minlength="2"
-              maxlength="200"
-              autocomplete="off"
-            />
-            <span class="popup__input-error popup__input-error_type_job"></span>
+            <label class="popup__label">
+              <input
+                id="inputName"
+                type="text"
+                name="inputName"
+                class="popup__input popup__input_type_name"
+                placeholder="Имя"
+                required
+                minlength="2"
+                maxlength="40"
+                autocomplete="off"
+              />
+              <span class="inputName-error error"></span>
+            </label>
+            <label class="popup__label">
+              <input
+                id="inputJob"
+                type="text"
+                name="inputJob"
+                class="popup__input popup__input_type_job"
+                placeholder="Профессия"
+                required
+                minlength="2"
+                maxlength="200"
+                autocomplete="off"
+              />
+              <span class="inputJob-error error"></span>
+            </label>
             <button
               class="popup__button popup__button-submit popup__button_type_disabled"
               type="submit"
@@ -96,28 +99,33 @@
             class="popup__button-close popup__button-close-add"
             type="button"
           ></button>
-          <form class="popup__form popup__form-add" name="form-profile">
+          <form class="popup__form popup__form-add" name="formAddCard">
             <h2 class="popup__title">Новое место</h2>
-            <input
-              type="text"
-              name="new-place"
-              class="popup__input popup__input_type_new-place"
-              placeholder="Название"
-              required
-              minlength="2"
-              maxlength="30"
-            />
-            <span
-              class="popup__input-error popup__input-error_type_new-place"
-            ></span>
-            <input
-              type="url"
-              name="url"
-              class="popup__input popup__input_type_url"
-              placeholder="Ссылка на картинку"
-              required
-            />
-            <span class="popup__input-error popup__input-error_type_url"></span>
+            <label class="popup__label">
+              <input
+                id="name"
+                type="text"
+                name="name"
+                class="popup__input popup__input_type_new-place"
+                placeholder="Название"
+                required
+                minlength="2"
+                maxlength="30"
+              />
+              <span class="name-error error"></span>
+            </label>
+
+            <label class="popup__label">
+              <input
+                id="link"
+                type="url"
+                name="link"
+                class="popup__input popup__input_type_url"
+                placeholder="Ссылка на картинку"
+                required
+              />
+              <span class="link-error error"></span>
+            </label>
             <button class="popup__button popup__button-submit" type="submit">
               Создать
             </button>

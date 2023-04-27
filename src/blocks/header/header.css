@@ -2,15 +2,15 @@
   padding: 0 0 41px;
   margin: 45px 0 0;
   max-width: 880px;
-  width: calc(100% - 200px*2);
+  width: calc(100% - 200px * 2);
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
 @media screen and (max-width: 1055px) {
   .header {
-    width: calc(100% - 100px*2);
+    width: calc(100% - 100px * 2);
   }
 }
 

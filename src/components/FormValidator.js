@@ -1,81 +1,79 @@
 export class FormValidator {
-    constructor(form, config) {
-        this._form = form;
-        this._inputList = Array.from(this._form.querySelectorAll(config.inputSelector)); // создали массив из полей ввода формы
-        this._errorClassTemplate = config.errorClassTemplate;
-        this._activeErrorClass = config.activeErrorClass;
-        this._submitButton = this._form.querySelector(config.submitButtonSelector);
-        this._submitButtonDisabled = config.inactiveButtonClass;
-        this._errorElement = config._errorElementSelector;
-    }
-    
-    // метод показа ошибки
-    _showError(input) {
-        this._form.querySelector(`${this._errorClassTemplate}${input.name}`).textContent = input.validationMessage;
-        this._form.querySelector(`${this._errorClassTemplate}${input.name}`).classList.add(this._activeErrorClass);
-    }
+  constructor(config, popup) {
+    this._form = popup;
+    this._config = config;
+    this._buttonSave = this._form.querySelector(
+      this._config.submitButtonSelector
+    );
+    this._inputList = Array.from(
+      this._form.querySelectorAll(this._config.inputSelector)
+    );
+  }
 
-    // метод сокрытия ошибки
-    _hideError(input) {
-        this._form.querySelector(`${this._errorClassTemplate}${input.name}`).textContent = '';
-        this._form.querySelector(`${this._errorClassTemplate}${input.name}`).classList.remove(this._activeErrorClass);
-    }
+  enableValidation() {
+    this._setEventListeners();
+  }
 
-    // метод проверки поля ввода на валидность
-    _checkInputValidity(input) {
-        if(!input.validity.valid) {
-            this._showError(input)
-        } else {
-            this._hideError(input)
-        }
-    }
-    
-    // метод добавления слушателей
-    _setEventListeners() {
-        this._inputList.forEach(input => {
-            input.addEventListener('input', () => {
-                this._checkInputValidity(input);
-                this._toggleButtonState();
-            })
-        })
-    }
+  // ДИЗЕЙБЛИМ КНОПКУ
+  disableSubmitButton() {
+    this._buttonSave.classList.remove(this._config.activeButtonClass);
+    this._buttonSave.classList.add(this._config.inactiveButtonClass);
+    this._buttonSave.disabled = true;
+  }
 
-    // метод включения валидации
-    enableValidation() {
-        this._setEventListeners();
-        this._deleteErrors();
-        this._toggleButtonState();
+  // РАЗБЛОКИРОВКА КНОПКИ
+  enableSubmitButton() {
+    this._buttonSave.classList.add(this._config.activeButtonClass);
+    this._buttonSave.classList.remove(this._config.inactiveButtonClass);
+    this._buttonSave.disabled = false;
+  }
 
-    }
+  // ПОКАЗЫВАЕМ ОШИБКИ ИНПУТОВ
+  _showInputError(inputElement) {
+    const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
+    errorElement.classList.add(this._config.errorClass);
+    errorElement.textContent = inputElement.validationMessage;
+    inputElement.classList.add(this._config.inputErrorClass);
+  }
 
-    _toggleButtonState() {
-        if(!this._hasInvalidInput()) {
-            this._enableButton();    
-        } else {this._disableButton();}
-    }
+  // СКРЫВАЕМ ОШИБКИ ИНПУТОВ
+  _hideInputError(inputElement) {
+    const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
+    errorElement.classList.remove(this._config.errorClass);
+    errorElement.textContent = "";
+    inputElement.classList.remove(this._config.inputErrorClass);
+  }
 
-    _disableButton() {
-        this._submitButton.classList.add(this._submitButtonDisabled);
+  // ПРОВЕРЯЕМ НА ВВОД ИНПУТЫ
+  _checkInputValidity(inputElement) {
+    if (inputElement.validity.valid) {
+      this._hideInputError(inputElement);
+    } else {
+      this._showInputError(inputElement);
     }
+  }
 
-    _enableButton() {
-        this._submitButton.classList.remove(this._submitButtonDisabled);
-    }
+  _hasInvalidInput() {
+    return this._inputList.some((inputElement) => !inputElement.validity.valid);
+  }
 
-    _hasInvalidInput() {
-        return this._inputList.some(input => !input.validity.valid);
+  // БЛОКИРОВКА КНОПКИ ЕСЛИ ПОЛЯ НЕВАЛИДНЫЕ
+  _toggleButtonState() {
+    if (this._hasInvalidInput()) {
+      this.disableSubmitButton();
+    } else {
+      this.enableSubmitButton();
     }
+  }
 
-    resetValidation() {
-        this._toggleButtonState();
-        this._inputList.forEach(input => {
-            this._hideError(input);
-        });
-    }
+  _setEventListeners() {
+    this._toggleButtonState(this._inputList, this._buttonSave);
 
-    _deleteErrors() {
-        const errors = Array.from(document.querySelectorAll(this._errorElement));
-        errors.forEach(error => {error.textContent = ''});
-    }
+    this._inputList.forEach((inputElement) => {
+      inputElement.addEventListener("input", () => {
+        this._checkInputValidity(inputElement);
+        this._toggleButtonState(this._inputList, this._buttonSave);
+      });
+    });
+  }
 }
-
