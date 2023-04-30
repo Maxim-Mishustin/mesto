@@ -19,7 +19,7 @@ import {
 
 /////////////////////////////
 ///                       ///
-///       ФУНКЦИИ         ///         
+///       ФУНКЦИИ         ///
 ///                       ///
 /////////////////////////////
 
@@ -31,7 +31,7 @@ function createCard(cardData) {
 }
 
 // ОТКРЫТИЕ ПОПАПА РЕДАКТИРОВАНИЯ ПРОФИЛЯ
-function popupEditProfile() {
+function openPopupProfile() {
   const { title, subtitle } = userInformation.getUserInfo();
   cardElementName.value = title;
   cardElementJob.value = subtitle;
@@ -41,7 +41,7 @@ function popupEditProfile() {
 }
 
 // ОТКРЫТИИ ПОПАПА ДЛЯ СОЗДАНИЯ НОВОЙ КАРТОЧКИ
-function popupAddCard() {
+function openPopupAddCard() {
   formCardValidator.disableSubmitButton();
   popupAddCardClass.open();
 }
@@ -65,7 +65,11 @@ const userInformation = new UserInfo({
 });
 
 // ЭКЗЕМПЛЯР КЛАССА РЕДАКТИРОВАНИЯ ПРОФИЛЯ
-const popupEditorClass = new PopupWithForm(".popup_type_edit", handleProfileFormSubmit);
+const popupEditorClass = new PopupWithForm(
+  ".popup_type_edit",
+  handleProfileFormSubmit
+);
+popupEditorClass.setEventListeners();
 
 // ИНИЦИАЛИЗАЦИЯ КАРТОЧЕК ЧЕРЕЗ ЭКЗЕМПЛЯР КЛАССА SECTION
 const cardSection = new Section(
@@ -79,9 +83,11 @@ const popupAddCardClass = new PopupWithForm(".popup_type_add", (cardData) => {
   cardSection.addItem(createCard(cardData));
   popupAddCardClass.close();
 });
+popupAddCardClass.setEventListeners();
 
 // ЭКЗЕМПЛЯР КЛАССА С БОЛЬШОЙ КАРТИНКОЙ
 const popupOpenCardImage = new PicturePopup(".popup_type_big-card");
+popupOpenCardImage.setEventListeners();
 
 // ЭКЗЕМЛЯР КЛАССА ВАЛИДАЦИИ-РЕДАКТИРОВАНИЯ ПРОФИЛЯ
 const formEditValidator = new FormValidator(validationConfig, formEditProfile);
@@ -98,10 +104,10 @@ formCardValidator.enableValidation();
 ///////////////////////////////
 
 // КНОПКА ОТКРЫТИЯ ПОПАПА РЕДАКТИРОВАНИЕ ПРОФИЛЯ
-profileEditButton.addEventListener("click", () => popupEditProfile());
+profileEditButton.addEventListener("click", () => openPopupProfile());
 
 // КНОПКА ОТКРЫТИЯ ПОПАПА НОВОЕ МЕСТО
-profileAddButton.addEventListener("click", () => popupAddCard());
+profileAddButton.addEventListener("click", () => openPopupAddCard());
 
 // ИНИЦИАЛИЗАЦИЯ СЕКЦИИ С КАРТОЧКАМИ НА СТРАНИЦЕ
 cardSection.renderItems(cards.reverse());

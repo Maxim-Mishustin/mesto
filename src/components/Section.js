@@ -4,13 +4,13 @@ export class Section {
     this._container = document.querySelector(containerSelector);
   }
 
-  addItem = (cardData) => {
-    this._container.prepend(cardData);
+  addItem = (element) => {
+    this._container.prepend(element);
   };
 
   renderItems(items) {
-    items.forEach((cardData) => {
-      return this._renderer(cardData);
+    items.forEach((item) => {
+      return this._renderer(item);
     });
   }
 }
