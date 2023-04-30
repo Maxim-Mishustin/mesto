@@ -7,34 +7,34 @@ import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
 
 import { cards } from "../utils/cards.js";
-import { config } from "../utils/config.js";
+import { validationConfig } from "../utils/validationConfig.js";
 import {
   profileAddButton,
   profileEditButton,
   formEditProfile,
-  editInputName,
-  editJobInput,
+  cardElementName,
+  cardElementJob,
   formAddProfile,
 } from "../utils/constants.js";
 
 /////////////////////////////
 ///                       ///
-///       ФУНКЦИИ         ///
+///       ФУНКЦИИ         ///         
 ///                       ///
 /////////////////////////////
 
-// СОЗДАЕМ КАРТОЧКИ ИЗ МАССИВА CARDS
-function creatingCards(element) {
-  return new Card(element, "#templateCards", () =>
-    popupOpenCardImage.open(element)
-  ).createInitialCard();
+// СОЗДАЕМ КАРТОЧКИ ИЗ МАССИВА CARDS creatingCards    : createCard
+function createCard(cardData) {
+  return new Card(cardData, "#templateCards", () =>
+    popupOpenCardImage.open(cardData)
+  ).generateCard();
 }
 
 // ОТКРЫТИЕ ПОПАПА РЕДАКТИРОВАНИЯ ПРОФИЛЯ
 function popupEditProfile() {
   const { title, subtitle } = userInformation.getUserInfo();
-  editInputName.value = title;
-  editJobInput.value = subtitle;
+  cardElementName.value = title;
+  cardElementJob.value = subtitle;
 
   formEditValidator.disableSubmitButton();
   popupEditorClass.open();
@@ -46,8 +46,8 @@ function popupAddCard() {
   popupAddCardClass.open();
 }
 
-// ОТРИСОВКА ДАННЫХ О ПОЛЬЗОВАТЕЛЕ НА СТРАНИЦЕ
-function setFormValues(value) {
+// ОТРИСОВКА ДАННЫХ О ПОЛЬЗОВАТЕЛЕ НА СТРАНИЦЕ   setFormValues: handleProfileFormSubmit
+function handleProfileFormSubmit(value) {
   userInformation.setUserInfo(value.inputName, value.inputJob);
   popupEditorClass.close();
 }
@@ -65,33 +65,30 @@ const userInformation = new UserInfo({
 });
 
 // ЭКЗЕМПЛЯР КЛАССА РЕДАКТИРОВАНИЯ ПРОФИЛЯ
-const popupEditorClass = new PopupWithForm(".popup_type_edit", setFormValues);
-popupEditorClass.setEventListeners();
+const popupEditorClass = new PopupWithForm(".popup_type_edit", handleProfileFormSubmit);
 
 // ИНИЦИАЛИЗАЦИЯ КАРТОЧЕК ЧЕРЕЗ ЭКЗЕМПЛЯР КЛАССА SECTION
 const cardSection = new Section(
   {
-    renderer: (element) => cardSection.addItem(creatingCards(element)),
+    renderer: (cardData) => cardSection.addItem(createCard(cardData)),
   },
   ".elements"
 );
 // ЭКЗЕМПЛЯР КЛАССА НОВОЕ МЕСТО
-const popupAddCardClass = new PopupWithForm(".popup_type_add", (element) => {
-  cardSection.addItem(creatingCards(element));
+const popupAddCardClass = new PopupWithForm(".popup_type_add", (cardData) => {
+  cardSection.addItem(createCard(cardData));
   popupAddCardClass.close();
 });
-popupAddCardClass.setEventListeners();
 
 // ЭКЗЕМПЛЯР КЛАССА С БОЛЬШОЙ КАРТИНКОЙ
 const popupOpenCardImage = new PicturePopup(".popup_type_big-card");
-popupOpenCardImage.setEventListeners();
 
 // ЭКЗЕМЛЯР КЛАССА ВАЛИДАЦИИ-РЕДАКТИРОВАНИЯ ПРОФИЛЯ
-const formEditValidator = new FormValidator(config, formEditProfile);
+const formEditValidator = new FormValidator(validationConfig, formEditProfile);
 formEditValidator.enableValidation();
 
 // ЭКЗЕМЛЯР КЛАССА ВАЛИДАЦИИ-НОВОЕ МЕСТО
-const formCardValidator = new FormValidator(config, formAddProfile);
+const formCardValidator = new FormValidator(validationConfig, formAddProfile);
 formCardValidator.enableValidation();
 
 ///////////////////////////////

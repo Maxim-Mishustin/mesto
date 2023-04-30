@@ -8,15 +8,15 @@ const formEditProfile = document.forms.formProfile;
 // ФОРМА НОВОЕ МЕСТО
 const formAddProfile = document.forms.formAddCard;
 
-// ПОЛЯ ФОРМЫ РЕДАКТИРОВАНИЯ
-const editInputName = formEditProfile.elements.inputName;
-const editJobInput = formEditProfile.elements.inputJob;
+// ПОЛЯ ФОРМЫ РЕДАКТИРОВАНИЯ    editInputName: cardElementName ; editJobInput: cardElementJob
+const cardElementName = formEditProfile.elements.inputName;
+const cardElementJob = formEditProfile.elements.inputJob;
 
 export {
   profileAddButton,
   profileEditButton,
   formEditProfile,
-  editInputName,
-  editJobInput,
+  cardElementName,
+  cardElementJob,
   formAddProfile,
 };

@@ -1,10 +1,10 @@
 // СОЗДАЕМ КЛАСС КАРТОЧКИ, В КОНСТРУКТОР КОТОРОГО ПЕРЕДАЕМ НАЗВАНИЕ, ССЫЛКУ НА ИЗОБРАЖЕНИЕ, АЛЬТ И ШАБЛОН
 export class Card {
-  constructor(data, cardTemplate, handleBigCardPopup) {
+  constructor(data, cardTemplate, handleImageClick) {
     this._name = data.name;
     this._link = data.link;
     this._cardTemplate = cardTemplate;
-    this._handleBigCardPopup = handleBigCardPopup;
+    this._handleImageClick = handleImageClick;
   }
 
   // СОЗДАЕМ МЕТОД, КОТОРЫЙ ВОЗВРАЩАЕТ ШАБЛОН НОВОЙ КАРТОЧКИ
@@ -20,38 +20,38 @@ export class Card {
   // МЕТОД ДОБАВЛЕНИЯ СЛУШАТЕЛЯ НА ЭЛЕМЕНТЫ КАРТОЧКИ
   _setEventListeners() {
     this._elementLikeButton.addEventListener("click", () =>
-      this._setLikeButton()
+      this._handleLikeClick()
     );
     this._elementDeleteButton.addEventListener("click", () =>
-      this._setDeleteButton()
+      this._handleDeleteClick()
     );
     this._elementImage.addEventListener("click", () =>
-      this._handleBigCardPopup(this._name, this._link)
+      this._handleImageClick(this._name, this._link)
     );
   }
 
-  // РЕАЛИЗАЦИЯ РАБОЧЕГО ЛАЙКА
-  _setLikeButton() {
+  // РЕАЛИЗАЦИЯ РАБОЧЕГО ЛАЙКА 
+  _handleLikeClick() {
     this._elementLikeButton.classList.toggle("element__like_active"); // выбираем лайк внутри каждой карточки. + тагл
   }
 
-  // МЕТОД УДАЛЕНИЯ КАРТОЧКИ
-  _setDeleteButton() {
-    this._initialCard.remove();
-    this._initialCard = null;
+  // МЕТОД УДАЛЕНИЯ КАРТОЧКИ  
+  _handleDeleteClick() {
+    this._card.remove();
+    this._card = null;
   }
   // ПУБЛИЧНЫЙ МЕТОД, КОТОРЫЙ ЗАПОЛНИТ ШАБЛОН НОВОЙ КАРТОЧКИ НЕОБХОДИМЫМИ ДАННЫМИ (КАРТИНКА, НАЗВАНИЕ И ТД)
-  createInitialCard() {
-    this._initialCard = this._getTemplate(); // ЗАПИСЫВАЕМ В ПЕРЕМЕННУЮ ШАБЛОН НОВОЙ КАРТОЧКИ
-    this._elementImage = this._initialCard.querySelector(".element__image");
-    this._elementTitle = this._initialCard.querySelector(".element__title");
-    this._elementLikeButton = this._initialCard.querySelector(".element__like");
+  generateCard() {
+    this._card = this._getTemplate(); // ЗАПИСЫВАЕМ В ПЕРЕМЕННУЮ ШАБЛОН НОВОЙ КАРТОЧКИ
+    this._elementImage = this._card.querySelector(".element__image");
+    this._elementTitle = this._card.querySelector(".element__title");
+    this._elementLikeButton = this._card.querySelector(".element__like");
     this._elementDeleteButton =
-      this._initialCard.querySelector(".element__delete");
+      this._card.querySelector(".element__delete");
     this._fillCard();
     this._setEventListeners();
 
-    return this._initialCard;
+    return this._card;
   }
 
   _fillCard = () => {

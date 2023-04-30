@@ -20,9 +20,7 @@ module.exports = {
         use: "babel-loader",
         exclude: /node_modules/,
       },
-      // правила для обработки js, html и других файлов
-
-      // добавьте ещё одно правило:
+    
       {
         // применять это правило только к CSS-файлам
         test: /\.css$/,

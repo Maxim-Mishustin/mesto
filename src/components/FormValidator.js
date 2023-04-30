@@ -1,6 +1,6 @@
 export class FormValidator {
-  constructor(config, popup) {
-    this._form = popup;
+  constructor(config, form) {
+    this._form = form;
     this._config = config;
     this._buttonSave = this._form.querySelector(
       this._config.submitButtonSelector
@@ -67,12 +67,10 @@ export class FormValidator {
   }
 
   _setEventListeners() {
-    this._toggleButtonState(this._inputList, this._buttonSave);
-
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(this._inputList, this._buttonSave);
+        this._toggleButtonState();
       });
     });
   }

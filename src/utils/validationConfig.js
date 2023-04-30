@@ -1,4 +1,4 @@
-export const config = {
+export const validationConfig = {                // изменено имя config   : validationConfig
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button",
