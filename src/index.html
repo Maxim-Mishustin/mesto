@@ -15,13 +15,23 @@
           alt="Логотип Mesto Russia"
         />
       </header>
+
       <main class="content">
         <section class="profile">
-          <img
-            class="profile__avatar"
-            src="<%=require('./images/image.jpg')%>"
-            alt="Аватар"
-          />
+          <div class="profile__wrapper">
+            <img
+              class="profile__avatar"
+              src="<%=require('./images/image.jpg')%>"
+              alt="Аватар"
+            />
+            <button class="profile__edit-button-avatar" type="button">
+              <img
+                class="profile__edit-pen"
+                src="<%=require('./images/edit-pen.svg')%>"
+                alt="Ручка редактирования"
+              />
+            </button>
+          </div>
           <div class="profile__info">
             <div class="profile__title-edit">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -39,7 +49,22 @@
             class="profile__add-button"
           ></button>
         </section>
+
         <section class="elements"></section>
+        
+        <template id="templateCards">
+          <article class="element">
+            <img class="element__image" />
+            <button type="button" class="element__delete"></button>
+            <div class="element__description">
+              <h2 class="element__title"></h2>
+              <div class="element__container-like">
+                <button type="button" class="element__like"></button>
+                <p class="element__count-like"></p>
+              </div>
+            </div>
+          </article>
+        </template>
       </main>
       <footer class="footer">
         <p class="footer__copyright">&copy;&nbsp;2020 Mesto Russia</p>
@@ -58,7 +83,7 @@
               <input
                 id="inputName"
                 type="text"
-                name="inputName"
+                name="name"
                 class="popup__input popup__input_type_name"
                 placeholder="Имя"
                 required
@@ -72,7 +97,7 @@
               <input
                 id="inputJob"
                 type="text"
-                name="inputJob"
+                name="about"
                 class="popup__input popup__input_type_job"
                 placeholder="Профессия"
                 required
@@ -91,6 +116,7 @@
           </form>
         </div>
       </div>
+
       <!-- popup добавления карточки -->
       <div class="popup popup_type_add">
         <div class="popup__container">
@@ -114,7 +140,6 @@
               />
               <span class="name-error error"></span>
             </label>
-
             <label class="popup__label">
               <input
                 id="link"
@@ -146,16 +171,52 @@
           </figure>
         </div>
       </div>
-    </div>
-    <template id="templateCards">
-      <article class="element">
-        <img class="element__image" />
-        <button type="button" class="element__delete"></button>
-        <div class="element__description">
-          <h2 class="element__title"></h2>
-          <button type="button" class="element__like"></button>
+      <!-- popup подтверждения удаления карточки -->
+      <div class="popup popup_type_delete">
+        <div class="popup__container">
+          <button class="popup__button-close" type="button"></button>
+          <h2 class="popup__title popup__title_margin">Вы уверены?</h2>
+          <form class="popup__form">
+            <button
+              class="popup__button popup__button-submit popup__button-submit_margin"
+              type="submit"
+            >
+              Да
+            </button>
+          </form>
         </div>
-      </article>
-    </template>
+      </div>
+      <!-- popup редактирования аватара -->
+      <div class="popup popup_type_edit-avatar">
+        <div class="popup__container">
+          <button class="popup__button-close" type="button"></button>
+          <h2 class="popup__title">Обновить аватар</h2>
+          <form
+            class="popup__form"
+            name="editAvatar"
+            id="editAvatar"
+            novalidate
+          >
+            <label class="popup__label">
+              <input
+                id="avatar"
+                class="popup__input popup__input_type_link-avatar"
+                name="avatar"
+                type="url"
+                placeholder="Введите ссылку"
+                required
+              />
+              <span class="avatar-error error"></span>
+            </label>
+            <button
+              class="popup__button popup__button-submit popup__button_type_disabled"
+              type="submit"
+            >
+              Сохранить
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

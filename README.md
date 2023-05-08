@@ -4,6 +4,7 @@
 * Интро
 * Figma
 * Картинки
+* GitHub Pages
 
 **Интро**
 
@@ -24,6 +25,10 @@ https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=2
 **Картинки**
 
 Использованы оптимизированные изображения.
+
+**GitHub Pages**
+
+[https://maxim-mishustin.github.io/mesto]
 
 
 По вопросам, касающимся работы этого сайта можете обратиться на почту: vs1.136@yandex.ru.

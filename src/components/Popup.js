@@ -10,6 +10,7 @@ export default class Popup {
   }
 
   open() {
+    this.setEventListeners();
     // ВЕШАЕМ ОБРАБОТЧИКИ POPUP
     document.addEventListener("keydown", this._handleEscClose);
     // И ТОЛЬКО ПОТОМ ПОКАЗЫВАЕМ POPUP

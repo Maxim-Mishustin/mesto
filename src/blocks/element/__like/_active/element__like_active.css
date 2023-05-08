@@ -1,11 +1,8 @@
 .element__like_active {
   background-image: url(../../../../images/vector-like-active.svg);
-  background-size: contain;
-  border: none;
-  background-repeat: no-repeat;
+  display: block;
   background-color: transparent;
-  background-position: center;
+  border: none;
   width: 22px;
-  margin: 8px 5px 0 0;
+  height: 19px;
 }
-  

@@ -1,12 +1,7 @@
 .element__description {
+  padding: 0;
+  margin: 25px 15px 25px 21px;
   display: flex;
   justify-content: space-between;
-  padding: 18px 15px 30px 21px;
-  min-height: 22px;
-}
-
-@media screen and (max-width: 320px) {
-  .element__description {
-    padding: 20px 15px 30px 21px;
-  }
+  align-items: center;
 }

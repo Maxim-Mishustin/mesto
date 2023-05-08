@@ -66,6 +66,7 @@ export class FormValidator {
     }
   }
 
+  // МЕТОД ДОБАВЛЕНИЯ СЛУШАТЛЕЙ ПОЛЯМ
   _setEventListeners() {
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {

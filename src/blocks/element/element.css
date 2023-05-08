@@ -1,10 +1,15 @@
 .element {
-  background-color: white;
+  margin: 0;
+  padding: 0;
+  height: 361px;
+  max-width: 100%;
+  background: #fff;
   border-radius: 10px;
-  overflow: hidden;
-  max-width: 880px;
+  box-sizing: border-box;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  transition: 0.9s ease-in-out;
+}
+
+.element:hover {
+  transform: scale(1.08);
 }
