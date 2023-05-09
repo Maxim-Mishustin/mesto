@@ -106,22 +106,26 @@ async function handleFormSubmitCreateCard(data) {
 
 // СОЗДАНИЕ ОТДЕЛЬНОГО ЭКЗЕМПЛЯРА КЛАССА ДЛЯ КАЖДОГО ПОПАПА
 const popupImage = new PicturePopup(".popup_type_big-card");
+popupImage.setEventListeners()
 
 const popupAdd = new PopupWithForm(
   ".popup_type_add",
   handleFormSubmitCreateCard
 );
 
+popupAdd.setEventListeners()
 const popupEdit = new PopupWithForm(
   ".popup_type_edit",
   handleFormSubmitProfile
 );
 
+popupEdit.setEventListeners()
 const popupAvatar = new PopupWithForm(
   ".popup_type_edit-avatar",
   handleFormSubmitAvatar
 );
 
+popupAvatar.setEventListeners()
 const user = new UserInfo({
   name: nameProfile,
   about: aboutProfile,
@@ -141,6 +145,7 @@ const popupConfirmation = new PopupWithConfirmation(
   }
 );
 
+popupConfirmation.setEventListeners()
 // ЗАГРУЗКА КАРТОЧЕК С СЕРВЕРА
 const cardList = new Section(
   {
